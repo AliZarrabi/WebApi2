@@ -1,0 +1,25 @@
+@model MessageViewModel
+
+<div class="form-group" style="@(Model.IsUser ? "background-color:papayawhip" : "" )">
+    @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+            {
+        <h3><a asp-controller="Messages" asp-action="DisplayMessage" asp-route-id="@Model.MessageID">@Model.Title</a></h3>
+            <h5><a asp-controller="Messages" asp-action="DisplayByEmail" asp-route-email="@Model.Email">@Model.Email</a></h5>
+    }
+    else
+    {
+        <h3>@Model.Title</h3>
+            <h5>@Model.Email</h5>
+    }
+
+    <h4>@Model.Content</h4>
+    @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+            {
+        <div>
+            <a asp-controller="Messages" asp-action="Edit" asp-route-id="@Model.MessageID" class="btn btn-primary btn-xs">Edit</a>
+            |
+            <a href="#" class="delItem btn btn-danger btn-xs" thisID="@Model.MessageID">Delete</a>
+        </div>
+    }
+    <hr style="border-color: chocolate" />
+</div>

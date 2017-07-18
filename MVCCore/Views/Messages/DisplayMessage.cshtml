@@ -1,0 +1,42 @@
+@model MessageViewModel
+@{
+    ViewData["Title"] = "DisplayMessage";
+}
+
+<h2>DisplayMessage</h2>
+
+<div class="panItem panel panel-primary">
+    @Html.Partial("_SingleMessagePartial.cshtml", Model)
+
+    <br /><br />
+    <div style="text-align:center">
+        <a asp-controller="Messages" asp-action="Create" class="btn btn-success" style="margin-bottom:30px">Register New Message!</a>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+    $(function () {
+        $(".delItem").click(function () {
+            console.log("Clicked!");
+            var GetItem = confirm("Are you Sure?");
+            var Action = {url : '@Url.Action("Delete","Messages")'}
+            if (GetItem == true) {
+                var GetId = $(this).attr("thisID");
+                //var modelID = { 'MessageID': GetId };
+                console.log(GetId);
+                $.ajax({
+                    url: Action.url,
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify(GetId),
+                    type: "POST"
+                }).done(function (result) {
+                    location.reload();
+                    //$(".panItem").html(result);
+                });
+            }
+        });
+    });
+    </script>
+}

@@ -1,0 +1,37 @@
+﻿@model Message
+@{
+    ViewData["Title"] = ViewBag.Titr;
+}
+
+<h2>ثبت نظر شما</h2>
+
+<form asp-controller="Messages" asp-action="Create" method="post" asp-anti-forgery="true" novalidate>
+    @*@Html.AntiForgeryToken()*@
+    
+    @if (!User.Identity.IsAuthenticated)
+    {
+        @*@Html.EditorFor(m => m.Email)*@
+        @*@Html.ValidationMessageFor(model => model.Email)*@
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <br />
+    }
+    @*@Html.EditorFor(m => m.Content)*@
+    @*@Html.ValidationMessageFor(model => model.Content)*@
+    <label asp-for="Content" class="control-label"></label>
+    <input asp-for="Content" class="form-control" />
+    <span asp-validation-for="Content" class="text-danger"></span>
+    <br />
+    @*@Html.EditorFor(m => m.Title)*@
+    @*@Html.ValidationMessageFor(model => model.Title)*@
+    <label asp-for="Title" class="control-label"></label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+    <br /><br />
+    <input type="submit" value="ارسال پیام" class="btn btn-warning" />
+</form>
+<br /><br />
+@*@Html.ValidationSummary()*@
+<div asp-validation-summary="All"></div>
+

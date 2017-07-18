@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MessageViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+@ViewBag.AppSetting1
+<br />
+@ViewBag.AppSetting2
+<br /><br /><br />
+
+<div class="panItem panel panel-primary">
+    @foreach (var msg in Model)
+    {
+        @Html.Partial("_SingleMessagePartial.cshtml", msg);
+    }
+
+    <br /><br />
+    <div style="text-align:center">
+        <a asp-controller="Messages" asp-action="Create" class="btn btn-success" style="margin-bottom:30px">Register New Message!</a>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+    $(function () {
+        $(".delItem").click(function () {
+            console.log("Clicked!");
+            var GetItem = confirm("Are you Sure?");
+            var Action = {url : '@Url.Action("Delete","Messages")'}
+            if (GetItem == true) {
+                var GetId = $(this).attr("thisID");
+                //var modelID = { 'MessageID': GetId };
+                console.log(GetId);
+                $.ajax({
+                    url: Action.url,
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify(GetId),
+                    type: "POST"
+                }).done(function (result) {
+                    location.reload();
+                    //$(".panItem").html(result);
+                });
+            }
+        });
+    });
+    </script>
+}

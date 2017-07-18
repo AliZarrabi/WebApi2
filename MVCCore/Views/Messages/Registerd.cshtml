@@ -1,0 +1,16 @@
+﻿@model MVCCore.Models.Message
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2 style="color:darkgreen; text-emphasis:triangle">@ViewBag.Info</h2>
+
+Email : @Model.Email
+<br />
+Title : @Model.Title
+<br />
+Content : @Model.Content
+<br />
+
+<a asp-controller="Messages" asp-action="Index">برگشت</a>

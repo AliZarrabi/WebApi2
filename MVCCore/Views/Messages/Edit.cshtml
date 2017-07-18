@@ -1,0 +1,26 @@
+﻿@model Message
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>تغییر نظر کاربران</h2>
+
+<form asp-controller="Messages" asp-action="Edit" method="post" asp-anti-forgery="true" novalidate>
+    <input asp-for="MessageID" type="hidden" />
+    <label asp-for="Email" class="control-label"></label>
+    <input asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+    <br />
+    <label asp-for="Content" class="control-label"></label>
+    <input asp-for="Content" class="form-control" />
+    <span asp-validation-for="Content" class="text-danger"></span>
+    <br />
+    <label asp-for="Title" class="control-label"></label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+    <br /><br />
+    <input type="submit" value="ویرایش پیام" class="btn btn-warning" />
+</form>
+<br /><br />
+<div asp-validation-summary="All"></div>
+
